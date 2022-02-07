@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <h1 style="color:white">Angular CRUD</h1>
     <div class="d-flex">
-      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Add
+      <button (click)="clickAddEmployee()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        class="btn btn-success">Add
         Employee</button>
     </div>
   </div>
@@ -21,16 +22,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>l</td>
-      <td>Arun</td>
-      <td>Rawat</td>
-      <td>arun@123</td>
-      <td>9874562132</td>
-      <td>500000</td>
+    <tr *ngFor="let row of employeeData">
+      <td>{{row.id}}</td>
+      <td>{{row.firstName}}</td>
+      <td>{{row.lastName}}</td>
+      <td>{{row.email}}</td>
+      <td>{{row.mobile}}</td>
+      <td>{{row.salary}}</td>
       <td>
-        <button class="btn btn-info">Edit</button>
-        <button class="btn btn-danger mx-3">Delete</button>
+        <button (click)="onEdit(row)" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          class="btn btn-info">Edit</button>
+        <button (click)="deleteEmployeeData(row)" class="btn btn-danger mx-3">Delete</button>
       </td>
     </tr>
   </tbody>
@@ -71,7 +73,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button (click)="postEmployeeDetails()" type="button" class="btn btn-primary">Add</button>
+        <button *ngIf="showAdd" (click)="postEmployeeDetails()" type="button" class="btn btn-primary">Add</button>
+        <button *ngIf="showUpdate" (click)="updateEmployeeDetails()" type="button"
+          class="btn btn-primary">Update</button>
       </div>
     </div>
   </div>
